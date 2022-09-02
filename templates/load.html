@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row mt-50">
+        <div class="col-md-8 col-md-offset-2">
+            <h2 class="text-center heading-separator" style="color:white">Load file into database</h2>
+
+                <p>Click on the "Choose File" button to read a file into the database:</p>
+
+                    <form action="{{ url_for('.load')}}" method="post" enctype="multipart/form-data">
+                      <input type="file" name="file">
+
+                      <div class="text-center mt-20">
+                          <button class="btn btn-green">Load File</button>
+                      </div>
+                    </form>
+              </div>
+          </div><!-- /.form -->
+
+{% endblock %}

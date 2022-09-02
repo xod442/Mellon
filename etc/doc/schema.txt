@@ -1,0 +1,10 @@
+{
+    _id: ObjectId("629b6f901bad6abcce76da95"),
+    full_name: 'USF HOLDING CORP - US',
+    short_name: 'USF',
+    uuid: '4b5a1b0e-8a75-41b2-86dd-bebce2aef345',
+    credit: '-86000.00',
+    type: 'HPC_MCS_WO_PL_TN_PROD',
+    product: 'NW',
+    transaction: '24Z942815002'
+  }

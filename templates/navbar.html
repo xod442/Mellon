@@ -1,0 +1,28 @@
+
+{% block content %}
+
+<nav id="primary-navigation" class="site-navigation">
+    <div class="container">
+
+        <div class="navbar-header">
+
+            <a class="site-title" style="color:white"><span>Auto.</span>mell</a>
+
+        </div><!-- /.navbar-header -->
+
+        <div class="collapse navbar-collapse" id="agency-navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white">Help</a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                    <li><a href="{{ url_for('help') }}">Load Help</a></li>
+                    <li><a href="{{ url_for('network') }}">Network</a></li>
+                    <li><a href="{{ url_for('vlans') }}">VLANS</a></li>
+
+                  </ul>
+            </ul>
+
+        </div>
+
+    </div>
+</nav><!-- /.site-navigation -->
+{% endblock %}

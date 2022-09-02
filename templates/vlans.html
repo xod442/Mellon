@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+            <div class="container">
+                        <h2 class="text-center heading-separator" style="color:white">Vlan Configuration</h2>
+                        <form method="POST" action="{{ url_for('.home')}}">
+                            <img src="{{url_for('static', filename='img/vlans.png')}}" height="950" width="1450" />
+                                <button class="btn btn-green">Home</button>
+                        </form>
+                     </div>
+
+{% endblock %}
