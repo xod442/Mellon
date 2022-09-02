@@ -109,6 +109,7 @@ def help():
 
 @app.route("/generate", methods=('GET', 'POST'))
 def generate():
+
     entryone = {
         "ntp_address": request.form['ntp_address'],
         "config_name": request.form['config_name'],
@@ -123,10 +124,10 @@ def generate():
         "vm_prod_vlan_mask": request.form['vm_prod_vlan_mask'],
         "mlag_vip_ip": request.form['mlag_vip_ip'],
         "mlag_vip_mask": request.form['mlag_vip_mask'],
-        "mzero_switch_1_ip": request.form['mzero_switch_1_ip'],
-        "mzero_switch_1_mask": request.form['mzero_switch_1_mask'],
-        "mzero_switch_2_ip": request.form['mzero_switch_2_ip'],
-        "mzero_switch_2_mask": request.form['mzero_switch_2_mask'],
+        #"mzero_switch_1_ip": request.form['mzero_switch_1_ip'],
+        #"mzero_switch_1_mask": request.form['mzero_switch_1_mask'],
+        #"mzero_switch_2_ip": request.form['mzero_switch_2_ip'],
+        #"mzero_switch_2_mask": request.form['mzero_switch_2_mask'],
         "gateway": request.form['gateway'],
         "iscsi_a_vlan_number": 4001,
         "iscsi_b_vlan_number": 4002
@@ -161,10 +162,10 @@ def generate():
         "vm_prod_vlan_mask": request.form['vm_prod_vlan_mask'],
         "mlag_vip_ip": request.form['mlag_vip_ip'],
         "mlag_vip_mask": request.form['mlag_vip_mask'],
-        "mzero_switch_1_ip": request.form['mzero_switch_1_ip'],
-        "mzero_switch_1_mask": request.form['mzero_switch_1_mask'],
-        "mzero_switch_2_ip": request.form['mzero_switch_2_ip'],
-        "mzero_switch_2_mask": request.form['mzero_switch_2_mask'],
+        #"mzero_switch_1_ip": request.form['mzero_switch_1_ip'],
+        #"mzero_switch_1_mask": request.form['mzero_switch_1_mask'],
+        #"mzero_switch_2_ip": request.form['mzero_switch_2_ip'],
+        #"mzero_switch_2_mask": request.form['mzero_switch_2_mask'],
         "gateway": request.form['gateway'],
         "iscsi_a_vlan_number": 4001,
         "iscsi_b_vlan_number": 4002

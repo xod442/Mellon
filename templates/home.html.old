@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% include "navbar.html" %}
+
+{% block content %}
+<hr>
+  <p style="color:white"></p>
+                  <div class="container">
+                    <div class="row mt-50">
+                      <h1 style="color:white"> dHCI Switch Configuration Generator</h1>
+                        <div class="col-md-8 col-md-offset-2">
+                                <div class="card-body"
+                                <form method="POST" action="{{ url_for('.network')}}">
+                                    <div class="row">
+                                        <div class="col-sm-4 mt-20">
+                                            <div class="form-group">
+                                              <label for="ntp_address" style="color:white">NTP Server:</label>
+                                              <input type="text" required class="form-control" placeholder="4.2.2.2" id="ntp_address" name="ntp_address">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 mt-20">
+                                            <div class="form-group">
+                                              <label for="name" style="color:white">CONFIGURATION FILENAME:</label>
+                                              <input type="text" required class="form-control" placeholder="No Special Characters" id="config_name" name="config_name">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 mt-20">
+                                            <div class="form-group">
+                                              <label for="gateway" style="color:white">CUSTOMER DEFAULT GW:</label>
+                                              <input type="text" required class="form-control" placeholder="Customer Gateway IP" id="gateway" name="gateway">
+                                            </div>
+                                        </div>
+                                        <div>
+
+                                        <div class="col-sm-2 mt-20">
+                                            <div class="form-group">
+                                              <label for="ilo_vlan_number" style="color:white">ILO VLAN #:</label>
+                                              <input type="text" required class="form-control" placeholder="2" id="ilo_vlan_number" name="ilo_vlan_number">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5 mt-20">
+                                            <div class="form-group">
+                                              <label for="ilo_vlan_ip" style="color:white">ILO VLAN IP ADDRESS:</label>
+                                              <input type="text" required class="form-control" placeholder="192.168.1.15" id="ilo_vlan_ip" name="ilo_vlan_ip">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5 mt-20">
+                                            <div class="form-group">
+                                              <label for="ilo_vlan_mask" style="color:white">ILO VLAN IP MASK:</label>
+                                              <input type="text" required class="form-control" placeholder="24" id="ilo_vlan_mask" name="ilo_vlan_mask">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-2 mt-20">
+                                            <div class="form-group">
+                                              <label for="management_vlan_number" style="color:white">MGT VLAN #:</label>
+                                              <input type="text" required class="form-control" placeholder="3" id="managment_vlan_number" name="management_vlan_number">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5 mt-20">
+                                            <div class="form-group">
+                                              <label for="management_vlan_ip" style="color:white">MANAGEMENT VLAN IP ADDRESS:</label>
+                                              <input type="text" required class="form-control"placeholder="137.162.10.1" id="management_vlan_ip" name="management_vlan_ip">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5 mt-20">
+                                            <div class="form-group">
+                                              <label for="management_vlan_mask" style="color:white">MANAGEMENT VLAN MASK:</label>
+                                              <input type="text" required class="form-control" placeholder="24" id="management_vlan_mask" name="management_vlan_mask">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-2 mt-20">
+                                            <div class="form-group">
+                                              <label for="vm_prod_vlan_number" style="color:white">VM VLAN #:</label>
+                                              <input type="text" required class="form-control" placeholder="4" id="vm_prod_vlan_number" name="vm_prod_vlan_number">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5 mt-20">
+                                            <div class="form-group">
+                                              <label for="vm_pro_vlan_ip" style="color:white">VM-PROD VLAN IP ADDRESS:</label>
+                                              <input type="text" required class="form-control" placeholder="10.145.10.2" id="vm_pro_vlan_ip" name="vm_prod_vlan_ip">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5 mt-20">
+                                            <div class="form-group">
+                                              <label for="vm_prod_vlan_mask" style="color:white">VM-PROD VLAN MASK:</label>
+                                              <input type="text" required class="form-control" placeholder="24" id="vm_pro_vlan_mask" name="vm_prod_vlan_mask">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5 mt-20">
+                                            <div class="form-group">
+                                              <label for="mlag_vip_ip" style="color:white">MLAG VIP ADDRESS:</label>
+                                              <input type="text" required class="form-control" placeholder="172.16.1.1" id="malg_vip_ip" name="mlag_vip_ip">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5 mt-20">
+                                            <div class="form-group">
+                                              <label for="mlag_vip_mask" style="color:white">MLAG VIP MASK:</label>
+                                              <input type="text" required class="form-control" placeholder="24" id="mlag_vip_mask" name="mlag_vip_mask">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5 mt-20">
+                                            <div class="form-group">
+                                              <label for="name" style="color:white">M0 MGT SWITCH ONE IP:</label>
+                                              <input type="text" required class="form-control" placeholder="172.18.1.1" id="mzero_switch_1_ip" name="mzero_switch_1_ip">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5 mt-20">
+                                            <div class="form-group">
+                                              <label for="name" style="color:white">M0 MGT SWITCH ONE MASK:</label>
+                                              <input type="text" required class="form-control" placeholder="24" id="mzero_switch_1_mask" name="mzero_switch_1_mask">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5 mt-20">
+                                            <div class="form-group">
+                                              <label for="name" style="color:white">M0 MGT SWITCH TWO IP:</label>
+                                              <input type="text" required class="form-control" placeholder="172.18.1.1" id="mzero_switch_2_ip" name="mzero_switch_2_ip">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5 mt-20">
+                                            <div class="form-group">
+                                              <label for="name" style="color:white">M0 MGT SWITCH TWO MASK:</label>
+                                              <input type="text" required class="form-control" placeholder="24" id="mzero_switch_2_mask" name="mzero_switch_2_mask">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                      <hr>
+                                      <div>
+                                        <hr>
+                                      <p style="color:white">: </p>
+                                        <button type="submit" class="btn btn-green">Generate</button>
+                                      </div>
+                                </form>
+                            </div>
+                          </div>
+                        </div>
+                  </div><!-- /.form -->
+
+
+
+
+  {% endblock %}
