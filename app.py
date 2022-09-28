@@ -69,6 +69,11 @@ Home
 @app.route("/", methods=('GET', 'POST'))
 def home():
 
+    return render_template('mellon.html')
+
+@app.route("/menu", methods=('GET', 'POST'))
+def menu():
+
     return render_template('home.html')
 
 
@@ -79,16 +84,6 @@ Load and Database Section
 #-------------------------------------------------------------------------------
 '''
 
-@app.route("/load", methods=('GET', 'POST'))
-def load():
-    if request.method == 'POST':
-        image = request.files['file']
-        filename = secure_filename(image.filename)
-        dbloader(db,filename)
-        message = 'File has been loaded in the MongoDb'
-        return render_template('message.html', message=message)
-    # Return for HTTP GET
-    return render_template('load.html')
 
 @app.route("/network", methods=('GET', 'POST'))
 def network():
@@ -106,6 +101,16 @@ def help():
     entry = 'HELP!'
     return render_template('help.html', entry=entry)
 
+@app.route("/load", methods=('GET', 'POST'))
+def load():
+    if request.method == 'POST':
+        image = request.files['file']
+        filename = secure_filename(image.filename)
+        arrays = dbloader(filename)        
+        message = 'Configuration files are generated'
+        return render_template('message.html', message=message)
+    # Return for HTTP GET
+    return render_template('load.html')
 
 @app.route("/generate", methods=('GET', 'POST'))
 def generate():
@@ -114,58 +119,39 @@ def generate():
         "ntp_address": request.form['ntp_address'],
         "config_name": request.form['config_name'],
         "ilo_vlan_number": request.form['ilo_vlan_number'],
-        "ilo_vlan_ip": request.form['ilo_vlan_ip'],
-        "ilo_vlan_mask": request.form['ilo_vlan_mask'],
+        "ilo_vlan_ip_1": request.form['ilo_vlan_ip_1'],
+        "ilo_vlan_mask_1": request.form['ilo_vlan_mask_1'],
         "management_vlan_number": request.form['management_vlan_number'],
-        "management_vlan_ip": request.form['management_vlan_ip'],
-        "management_vlan_mask": request.form['management_vlan_mask'],
+        "management_vlan_ip_1": request.form['management_vlan_ip_1'],
+        "management_vlan_mask_1": request.form['management_vlan_mask_1'],
         "vm_prod_vlan_number": request.form['vm_prod_vlan_number'],
-        "vm_prod_vlan_ip": request.form['vm_prod_vlan_ip'],
-        "vm_prod_vlan_mask": request.form['vm_prod_vlan_mask'],
+        "vm_prod_vlan_ip_1": request.form['vm_prod_vlan_ip_1'],
+        "vm_prod_vlan_mask_1": request.form['vm_prod_vlan_mask_1'],
         "mlag_vip_ip": request.form['mlag_vip_ip'],
         "mlag_vip_mask": request.form['mlag_vip_mask'],
-        #"mzero_switch_1_ip": request.form['mzero_switch_1_ip'],
-        #"mzero_switch_1_mask": request.form['mzero_switch_1_mask'],
-        #"mzero_switch_2_ip": request.form['mzero_switch_2_ip'],
-        #"mzero_switch_2_mask": request.form['mzero_switch_2_mask'],
+        "mgmt0_switch_1_ip": request.form['mgmt0_switch_1_ip'],
+        "mgmt0_switch_1_mask": request.form['mgmt0_switch_1_mask'],
         "gateway": request.form['gateway'],
         "iscsi_a_vlan_number": 4001,
         "iscsi_b_vlan_number": 4002
     }
 
-    temp_ilo_ip = request.form['ilo_vlan_ip'].split('.')
-    temp_management_ip = request.form['management_vlan_ip'].split('.')
-    temp_vm_prod_ip = request.form['vm_prod_vlan_ip'].split('.')
-    tmp = int(temp_ilo_ip[3])
-    last_octet = tmp + 1
-    ilo_vlan_ip2 = temp_ilo_ip[0]+'.'+temp_ilo_ip[1]+'.'+temp_ilo_ip[2]+'.'+str(last_octet)
-
-    tmp = int(temp_management_ip[3])
-    last_octet = tmp + 1
-    management_vlan_ip2 = temp_management_ip[0]+'.'+temp_management_ip[1]+'.'+temp_management_ip[2]+'.'+str(last_octet)
-
-    tmp = int(temp_vm_prod_ip[3])
-    last_octet = tmp + 1
-    vm_prod_vlan_ip2 = temp_vm_prod_ip[0]+'.'+temp_vm_prod_ip[1]+'.'+temp_vm_prod_ip[2]+'.'+str(last_octet)
-
     entrytwo = {
         "ntp_address": request.form['ntp_address'],
         "config_name": request.form['config_name'],
         "ilo_vlan_number": request.form['ilo_vlan_number'],
-        "ilo_vlan_ip": ilo_vlan_ip2,
-        "ilo_vlan_mask": request.form['ilo_vlan_mask'],
+        "ilo_vlan_ip_2": request.form['ilo_vlan_ip_2'],
+        "ilo_vlan_mask_2": request.form['ilo_vlan_mask_2'],
         "management_vlan_number": request.form['management_vlan_number'],
-        "management_vlan_ip": management_vlan_ip2,
-        "management_vlan_mask": request.form['management_vlan_mask'],
+        "management_vlan_ip_2": request.form['management_vlan_ip_2'],
+        "management_vlan_mask_2": request.form['management_vlan_mask_2'],
         "vm_prod_vlan_number": request.form['vm_prod_vlan_number'],
-        "vm_prod_vlan_ip": vm_prod_vlan_ip2,
-        "vm_prod_vlan_mask": request.form['vm_prod_vlan_mask'],
+        "vm_prod_vlan_ip_2": request.form['vm_prod_vlan_ip_2'],
+        "vm_prod_vlan_mask_2": request.form['vm_prod_vlan_mask_2'],
         "mlag_vip_ip": request.form['mlag_vip_ip'],
         "mlag_vip_mask": request.form['mlag_vip_mask'],
-        #"mzero_switch_1_ip": request.form['mzero_switch_1_ip'],
-        #"mzero_switch_1_mask": request.form['mzero_switch_1_mask'],
-        #"mzero_switch_2_ip": request.form['mzero_switch_2_ip'],
-        #"mzero_switch_2_mask": request.form['mzero_switch_2_mask'],
+        "mgmt0_switch_2_ip": request.form['mgmt0_switch_2_ip'],
+        "mgmt0_switch_2_mask": request.form['mgmt0_switch_2_mask'],
         "gateway": request.form['gateway'],
         "iscsi_a_vlan_number": 4001,
         "iscsi_b_vlan_number": 4002

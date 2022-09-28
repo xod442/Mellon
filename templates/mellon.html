@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+            <div class="container">
+                        <h2 class="text-center heading-separator" style="color:white"></h2>
+                        <form method="POST" action="{{ url_for('.menu')}}">
+                            <img src="{{url_for('static', filename='img/mellonx.png')}}" height="550" width="995" />
+                                <button class="btn btn-green">ENTER</button>
+                        </form>
+                     </div>
+
+
+
+{% endblock %}

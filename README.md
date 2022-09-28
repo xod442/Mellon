@@ -1,22 +1,19 @@
-# Mellon
-Mellanox 2010 switch configuration
-Installation:
-
-# must have git installed
-
-[Install Git](https://github.com/git-guides/install-git)
+# mell
+An automated process to generate Mellanox switch configurations.
 
 
-# Must have docker and docker compose installed.
-[Install Docker Desktop](https://www.docker.com/products/docker-desktop)
 
-Works well with docker-desktop for macbook
-
+# Installation:
 ```
-% git clone https://github.com/xod442/mellon.git
-% cd mellon
-mellon%  docker-compose up --build -d
+% git clone https://github.com/xod442/mell.git
+% cd projectx
+projectx%  docker-compose up -d
 ```
+
+# Home Screen Form
+The home screen form will contain the fields for all variables needed to
+complete the switch configuration. Config files for both switches will be
+downloaded.
 
 # Open browser
 Use: localhost:5005

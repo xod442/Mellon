@@ -6,9 +6,9 @@
 
     <div class="row mt-50">
         <div class="col-md-8 col-md-offset-2">
-            <h2 class="text-center heading-separator" style="color:white">Load file into database</h2>
+            <h2 class="text-center heading-separator" style="color:white">Select CSV file</h2>
 
-                <p>Click on the "Choose File" button to read a file into the database:</p>
+                <p>Click on the "Choose File" button to pick the CSV configuration file:</p>
 
                     <form action="{{ url_for('.load')}}" method="post" enctype="multipart/form-data">
                       <input type="file" name="file">
