@@ -68,7 +68,7 @@ def bulkloader(filename):
             }
             config_name = row[2]
 
-            config_one = config_name + 'switch_one.conf'
+            config_one = config_name + '_switch_one.conf'
 
             env = Environment(loader=FileSystemLoader('templates'))
             template_1 = env.get_template('gold_one.conf')
