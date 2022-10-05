@@ -1,4 +1,0 @@
-db.balance.aggregate([ { $match: {} }, { $group: { _id: "$short_name", Total: { $sum: "$credit" }}}])
-
-
-db.pets.aggregate([{$group:{_id: "$short_name",sum: { $sum: "$weight" }}}])

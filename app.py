@@ -40,6 +40,7 @@ import cgitb; cgitb.enable()
 form = cgi.FieldStorage()
 from werkzeug.utils import secure_filename
 from utility.loader import dbloader
+from utility.bulkloader import bulkloader
 
 from jinja2 import Environment, FileSystemLoader
 #
@@ -106,11 +107,22 @@ def load():
     if request.method == 'POST':
         image = request.files['file']
         filename = secure_filename(image.filename)
-        arrays = dbloader(filename)        
+        arrays = dbloader(filename)
         message = 'Configuration files are generated'
         return render_template('message.html', message=message)
     # Return for HTTP GET
     return render_template('load.html')
+
+@app.route("/loadbulk", methods=('GET', 'POST'))
+def loadbulk():
+    if request.method == 'POST':
+        image = request.files['file']
+        filename = secure_filename(image.filename)
+        bulk = bulkloader(filename)
+        message = 'Configuration files are generated'
+        return render_template('message.html', message=message)
+    # Return for HTTP GET
+    return render_template('loadbulk.html')
 
 @app.route("/generate", methods=('GET', 'POST'))
 def generate():
