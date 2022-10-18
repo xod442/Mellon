@@ -136,9 +136,6 @@ def generate():
         "management_vlan_number": request.form['management_vlan_number'],
         "management_vlan_ip_1": request.form['management_vlan_ip_1'],
         "management_vlan_mask_1": request.form['management_vlan_mask_1'],
-        "vm_prod_vlan_number": request.form['vm_prod_vlan_number'],
-        "vm_prod_vlan_ip_1": request.form['vm_prod_vlan_ip_1'],
-        "vm_prod_vlan_mask_1": request.form['vm_prod_vlan_mask_1'],
         "mlag_vip_ip": request.form['mlag_vip_ip'],
         "mlag_vip_mask": request.form['mlag_vip_mask'],
         "mgmt0_switch_1_ip": request.form['mgmt0_switch_1_ip'],
@@ -157,9 +154,6 @@ def generate():
         "management_vlan_number": request.form['management_vlan_number'],
         "management_vlan_ip_2": request.form['management_vlan_ip_2'],
         "management_vlan_mask_2": request.form['management_vlan_mask_2'],
-        "vm_prod_vlan_number": request.form['vm_prod_vlan_number'],
-        "vm_prod_vlan_ip_2": request.form['vm_prod_vlan_ip_2'],
-        "vm_prod_vlan_mask_2": request.form['vm_prod_vlan_mask_2'],
         "mlag_vip_ip": request.form['mlag_vip_ip'],
         "mlag_vip_mask": request.form['mlag_vip_mask'],
         "mgmt0_switch_2_ip": request.form['mgmt0_switch_2_ip'],
@@ -168,6 +162,7 @@ def generate():
         "iscsi_a_vlan_number": 4001,
         "iscsi_b_vlan_number": 4002
     }
+    # rick.append('fail')
 
     config_name = request.form['config_name']
     config_one = config_name + '_switch_one.conf'
