@@ -1,0 +1,57 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+
+
+
+            <h2 class="text-center heading-separator" style="color:white" >System Check</h2>
+            <form method="POST" action="{{ url_for('.home')}}">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="log_info" style="color:white">Switch One Logs:</label>
+                              <textarea id="log_info" readonly name="log_info" rows="20" cols="40">{% for l in log1 %}{{ l }}{{ '\n' }}{% endfor %}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="log_info" style="color:white">Switch One Commands:</label>
+                              <textarea id="log_info" readonly name="log_info" rows="20" cols="40">{% for c in commands_one %}{{ c }}{{ '\n' }}{% endfor %}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="log_info" style="color:white">Switch One Running:</label>
+                              <textarea id="log_info" readonly name="log_info" rows="20" cols="40">{{ one }}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="log_info" style="color:white">Switch Two Logs:</label>
+                              <textarea id="log_info" readonly name="log_info" rows="20" cols="40">{%+ for l in log2 %}{{ l }}{{ '\n' }}{%+ endfor %}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="log_info" style="color:white">Switch Two Commands:</label>
+                              <textarea id="log_info" readonly name="log_info" hard rows="20" cols="40">{%- for c in commands_two %}{{ c }}{{ '\n' }}{%- endfor %}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="log_info" style="color:white">Switch Two Running:</label>
+                              <textarea id="log_info" readonly name="log_info" rows="20" cols="40">{{ two }}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-20">
+                    <button class="btn btn-green">HOME</button>
+                </div>
+            </form>
+        </div>
+
+{% endblock %}

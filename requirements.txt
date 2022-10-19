@@ -1,3 +1,5 @@
 flask
 pytest
 PyMongo
+requests
+simplejson 

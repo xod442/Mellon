@@ -31,16 +31,15 @@ Mellanox 2010 Switch configuration
 from flask import Flask, request, render_template, abort, redirect, url_for
 from pymongo import MongoClient
 import datetime
+import requests
 import os
-from bson.json_util import dumps
-from bson.json_util import loads
+import json
 import uuid
 import cgi, os
 import cgitb; cgitb.enable()
 form = cgi.FieldStorage()
 from werkzeug.utils import secure_filename
-from utility.loader import dbloader
-from utility.bulkloader import bulkloader
+from utility.command_list import commands
 
 from jinja2 import Environment, FileSystemLoader
 #
@@ -59,6 +58,18 @@ config = {
 connector = "mongodb://{}:{}@{}".format(config["username"], config["password"], config["server"])
 client = MongoClient(connector)
 db = client["sales"]
+s = requests.Session()
+
+auth_headers = {
+    'Content-Type': 'application/x-www-form-urlencoded',
+}
+
+auth_params = {
+    'script': 'rh',
+    'template': 'json-request',
+    'action': 'json-login',
+}
+
 
 '''
 #-------------------------------------------------------------------------------
@@ -162,31 +173,69 @@ def generate():
         "iscsi_a_vlan_number": 4001,
         "iscsi_b_vlan_number": 4002
     }
-    # rick.append('fail')
+    # Start the machine
+    commands_one, commands_two = commands(entryone, entrytwo)
 
-    config_name = request.form['config_name']
-    config_one = config_name + '_switch_one.conf'
-    config_two = config_name + '_switch_two.conf'
+    # Create url for switch one
+    url = 'http://'+entryone['mgmt0_switch_1_ip']+'/admin/launch'
+    # create data
+    data = {"username": "admin","password": "admin"}
+    data= json.dumps(data)
 
-    env = Environment(loader=FileSystemLoader('templates'))
-    template_1 = env.get_template('gold_one.conf')
-    template_2 = env.get_template('gold_two.conf')
+    # Get authentication session_key
+    response = s.post(url, params=auth_params, auth_headers=headers, data=data)
+    client_dict = s.cookies.get_dict()
+    session_key = client_dict['session']
+    key = 'session=' + session_key
 
+    # Set headers and params for authenticating with a session key
+    headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'cookie': key
+    }
 
-    output_from_parsed_template = template_1.render(entryone=entryone)
+    params = {
+        'script': 'json',
+    }
+
+    # Init log list
+    log1 = []
+
     # to save the results
-    with open(config_one, "w") as fh:
-        fh.write(output_from_parsed_template)
-    fh.close()
+    for line in commands_one:
+        data = {"execution_type":"async"}
+        data = {"cmd": line}
+        data= json.dumps(data)
+        response = s.post(url,params=params,headers=headers,data=data)
+        log1.append('--------------------------------------------------')
+        log1.append(response.text)
+    data = {"execution_type":"async"}
+    data = {"cmd": "show run"}
+    data= json.dumps(data)
+    response = s.post(url,params=params,headers=headers,data=data)
+    # Get running config file switch one
+    one_run = response.text['data']
 
-    output_from_parsed_template = template_2.render(entrytwo=entrytwo)
+    # Init log list
+    log2 = []
+
     # to save the results
-    with open(config_two, "w") as fh:
-        fh.write(output_from_parsed_template)
-    fh.close()
+    for line in commands_two:
+        # Prep command to write async to the switch
+        data = {"execution_type":"async"}
+        data = {"cmd": line}
+        data= json.dumps(data)
+        # Send request
+        response = s.post(url,params=params,headers=headers,data=data)
+        log2.append('--------------------------------------------------')
+        log2.append(response.text)
+    # Prep command to write async to the switch
+    data = {"execution_type":"async"}
+    data = {"cmd": "show run"}
+    data= json.dumps(data)
+    response = s.post(url,params=params,headers=headers,data=data)
+    # Get running config file switch two
+    two_run = response.text['data']
 
-
-
-    message = 'Configuration files have been generated'
     # Return message
-    return render_template('message.html', message=message)
+    return render_template('results.html',commands_one=commands_one,commands_two=commands_two,log1=log1,log2=log2,one=one_run,two=two_run)
